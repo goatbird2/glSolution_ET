@@ -13,7 +13,7 @@ void renderScene();
 void resizeWindow(GLFWwindow* window, int width, int height);
 void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 void updateScene();
-
+void DrawPolygon(int _x, int _y, int _sides, float _radius);
 
 int main() {
 
@@ -57,7 +57,7 @@ int main() {
 
 	// Initialise scene - geometry and shaders etc
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // setup background colour to be black
-
+	gluOrtho2D(10.0f, -10.0f, 10.0f, -10.0f);
 
 	//
 	// 2. Main loop
@@ -90,6 +90,14 @@ void renderScene()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Render objects here...
+	/*glBegin(GL_TRIANGLES);
+		glVertex2f(-1.0f, -1.0f);
+		glVertex2f(1.0f, 1.0f);
+		glVertex2f(1.0f, -1.0f);
+	glEnd();*/
+
+	DrawPolygon(0, 0, 5, 3.0f);
+	
 }
 
 

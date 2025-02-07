@@ -13,7 +13,9 @@ void renderScene();
 void resizeWindow(GLFWwindow* window, int width, int height);
 void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 void updateScene();
-void DrawPolygon(int _x, int _y, int _sides, float _radius);
+void drawStarLine(float _atX, float _atY, float _innerRadius, float _outerRadius, int _points);
+void drawStarFill(float _atX, float _atY, float _innerRadius, float _outerRadius, int _points);
+
 
 int main() {
 
@@ -57,7 +59,7 @@ int main() {
 
 	// Initialise scene - geometry and shaders etc
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // setup background colour to be black
-	gluOrtho2D(10.0f, -10.0f, 10.0f, -10.0f);
+	gluOrtho2D(-2.0f, 2.0f, -2.0f, 2.0f);
 
 	//
 	// 2. Main loop
@@ -96,8 +98,11 @@ void renderScene()
 		glVertex2f(1.0f, -1.0f);
 	glEnd();*/
 
-	DrawPolygon(0, 0, 5, 3.0f);
-	
+	//calling draw star lined
+	drawStarLine(4.0f, 1.0f, 0.5f, 1.0f, 5);
+
+	//calling draw star filled
+	drawStarFill(-1.0f, -3.0f, 0.2f, 1.0f, 5);
 }
 
 
@@ -135,3 +140,39 @@ void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int 
 void updateScene() {
 }
 
+// Function to draw star
+void drawStarLine(float _atX, float _atY, float _innerRadius, float _outerRadius, int _points)
+{
+	if (_points > 4)
+	{
+
+		glBegin(GL_LINE_STRIP);
+
+		for (int i = 0; i <= _points * 2; i++)
+		{
+			if (i % 2)
+			{
+				float angle = 3.14 / _points * i;
+				float x = _atX + _innerRadius * cos(angle);
+				float y = _atY + _innerRadius * sin(angle);
+
+				glVertex2f(x, y);
+			}
+
+			else
+			{
+				float angle = 3.14 / _points * i;
+				float x = _atX + _outerRadius * cos(angle);
+				float y = _atY + _outerRadius * sin(angle);
+
+				glVertex2f(x, y);
+
+			}
+
+		}
+		glEnd();
+	}
+}
+
+
+	

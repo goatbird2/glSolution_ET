@@ -99,10 +99,9 @@ void renderScene()
 	glEnd();*/
 
 	//calling draw star lined
-	drawStarLine(4.0f, 1.0f, 0.5f, 1.0f, 5);
+	drawStarLine(0.0, 0.0, 0.5f, 1.0f, 5);
 
-	//calling draw star filled
-	drawStarFill(-1.0f, -3.0f, 0.2f, 1.0f, 5);
+	
 }
 
 
@@ -147,6 +146,8 @@ void drawStarLine(float _atX, float _atY, float _innerRadius, float _outerRadius
 	{
 
 		glBegin(GL_LINE_STRIP);
+
+		glColor3ub(25, 205, 30);
 
 		for (int i = 0; i <= _points * 2; i++)
 		{
